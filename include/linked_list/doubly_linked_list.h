@@ -16,7 +16,13 @@ struct DoublyLinkedList {
 };
 
 struct DoublyLinkedList createDoublyLinkedList();
-void queueDoublyLinkedList(struct DoublyLinkedList *list, int value);
-int unqueueDoublyLinkedList(struct DoublyLinkedList *list);
+void freeNodesDoublyLinkedList(struct DoublyLinkedList *list);
+
+void addFirstDoublyLinkedList(struct DoublyLinkedList *list, int value);
+void addLastDoublyLinkedList(struct DoublyLinkedList *list, int value);
+void addAtDoublyLinkedList(struct DoublyLinkedList *list, int value, int idx);
+int getDoublyLinkedList(struct DoublyLinkedList *list, int idx);
+int removeDoublyLinkedList(struct DoublyLinkedList *list, int idx);
+int removeLastDoublyLinkedList(struct DoublyLinkedList *list);
 
 #endif
