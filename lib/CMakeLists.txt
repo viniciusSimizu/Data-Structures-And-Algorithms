@@ -1,12 +1,7 @@
-project(${CMAKE_PROJECT_NAME})
+add_library(doubly_linked_list doubly_linked_list.c)
+add_library(ring_buffer ring_buffer.c)
+add_library(min_heap min_heap.c)
 
-add_library(doubly_linked_list list/doubly_linked_list.c)
-add_library(ring_buffer list/ring_buffer.c)
-
-target_link_libraries(doubly_linked_list
-	PUBLIC
-	interface_lib)
-
-target_link_libraries(ring_buffer
-	PUBLIC
-	interface_lib)
+target_include_directories(doubly_linked_list PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(ring_buffer PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(min_heap PUBLIC ${CMAKE_CURRENT_LIST_DIR})

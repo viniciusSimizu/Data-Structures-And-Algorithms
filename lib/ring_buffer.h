@@ -1,5 +1,4 @@
-#ifndef RING_BUFFER_H
-#define RING_BUFFER_H
+#pragma once
 
 struct RingBuffer {
   unsigned int len;
@@ -15,5 +14,3 @@ void ring_buffer_add_last(struct RingBuffer *buff, int value);
 int ring_buffer_remove_first(struct RingBuffer *buff);
 int ring_buffer_remove_last(struct RingBuffer *buff);
 int ring_buffer_get(struct RingBuffer *buff, unsigned int idx);
-
-#endif

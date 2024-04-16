@@ -2,14 +2,11 @@ cmake_minimum_required(VERSION 3.27.7)
 project(fun)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-add_subdirectory(include)
 add_subdirectory(lib)
 
-option(TESTS "Should build tests" ON)
-
-if (TESTS)
+option(TEST "Should build tests" ON)
+if (TEST)
 	enable_testing()
 	message(STATUS "Building tests")
-	add_subdirectory(tests)
+	add_subdirectory(test)
 endif()
