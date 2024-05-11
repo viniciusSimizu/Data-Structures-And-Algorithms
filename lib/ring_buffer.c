@@ -4,10 +4,10 @@
 #include "ring_buffer.h"
 
 int ring_buffer_end_idx(struct RingBuffer *buff);
-int ring_buffer_prev_idx(struct RingBuffer *buff, unsigned int idx);
-int ring_buffer_next_idx(struct RingBuffer *buff, unsigned int idx);
+int ring_buffer_prev_idx(struct RingBuffer *buff, int idx);
+int ring_buffer_next_idx(struct RingBuffer *buff, int idx);
 
-struct RingBuffer *ring_buffer_create(unsigned int size) {
+struct RingBuffer *ring_buffer_create(int size) {
   if (size < 0) {
     return NULL;
   }
@@ -81,7 +81,7 @@ int ring_buffer_remove_last(struct RingBuffer *buff) {
   return buff->arr[end];
 }
 
-int ring_buffer_get(struct RingBuffer *buff, unsigned int idx) {
+int ring_buffer_get(struct RingBuffer *buff, int idx) {
   if (idx < 0 || idx >= buff->len) {
     return INT_MIN;
   }
@@ -95,10 +95,10 @@ int ring_buffer_end_idx(struct RingBuffer *buff) {
   return (buff->start + buff->len - 1) % buff->size;
 }
 
-int ring_buffer_prev_idx(struct RingBuffer *buff, unsigned int idx) {
+int ring_buffer_prev_idx(struct RingBuffer *buff, int idx) {
   return buff->size - ((buff->size - idx) % buff->size) - 1;
 }
 
-int ring_buffer_next_idx(struct RingBuffer *buff, unsigned int idx) {
+int ring_buffer_next_idx(struct RingBuffer *buff, int idx) {
   return (idx + 1) % buff->size;
 }

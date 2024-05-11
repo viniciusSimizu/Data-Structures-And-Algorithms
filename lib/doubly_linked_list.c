@@ -5,7 +5,7 @@
 #include "doubly_linked_list.h"
 
 struct DoublyNode *doubly_linked_list_find_node(struct DoublyLinkedList *list,
-                                                unsigned int idx);
+                                                int idx);
 struct DoublyNode *doubly_linked_list_create_node(struct DoublyLinkedList *list,
                                                   int value);
 
@@ -71,7 +71,7 @@ void doubly_linked_list_add_last(struct DoublyLinkedList *list, int value) {
 }
 
 void doubly_linked_list_add_at(struct DoublyLinkedList *list, int value,
-                               unsigned int idx) {
+                               int idx) {
   if (idx == 0) {
     doubly_linked_list_add_first(list, value);
     return;
@@ -100,7 +100,7 @@ void doubly_linked_list_add_at(struct DoublyLinkedList *list, int value,
   ++list->len;
 }
 
-int doubly_linked_list_get(struct DoublyLinkedList *list, unsigned int idx) {
+int doubly_linked_list_get(struct DoublyLinkedList *list, int idx) {
   struct DoublyNode *curr = doubly_linked_list_find_node(list, idx);
   if (curr == NULL) {
     return INT_MIN;
@@ -109,7 +109,7 @@ int doubly_linked_list_get(struct DoublyLinkedList *list, unsigned int idx) {
   return curr->value;
 }
 
-int doubly_linked_list_remove(struct DoublyLinkedList *list, unsigned int idx) {
+int doubly_linked_list_remove(struct DoublyLinkedList *list, int idx) {
   struct DoublyNode *curr = doubly_linked_list_find_node(list, idx);
   if (curr == NULL) {
     return INT_MIN;
@@ -160,7 +160,7 @@ int doubly_linked_list_remove_last(struct DoublyLinkedList *list) {
 }
 
 struct DoublyNode *doubly_linked_list_find_node(struct DoublyLinkedList *list,
-                                                unsigned int idx) {
+                                                int idx) {
   if (idx >= list->len) {
     return NULL;
   }

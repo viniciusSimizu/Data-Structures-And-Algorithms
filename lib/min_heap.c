@@ -9,7 +9,7 @@ int min_heap_parent(int idx);
 int min_heap_left(int idx);
 int min_heap_right(int idx);
 
-struct min_heap *min_heap_build(unsigned int len, unsigned int size, int *arr) {
+struct min_heap *min_heap_build(int len, int size, int *arr) {
 	if (len > size) {
 		return NULL;
 	};
