@@ -10,9 +10,5 @@ endif()
 
 add_subdirectory(lib)
 
-option(TEST "Should build tests" ON)
-if(TEST)
-	enable_testing()
-	message(STATUS "Building tests")
-	add_subdirectory(test)
-endif()
+enable_testing()
+add_subdirectory(test)
