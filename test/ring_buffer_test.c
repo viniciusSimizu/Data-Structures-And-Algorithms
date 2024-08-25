@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "ring_buffer.h"
 
@@ -12,6 +13,7 @@ void ring_buffer_remove_last_tests();
 void ring_buffer_get_tests();
 
 int main() {
+	printf("rodei jão");
   ring_buffer_create_tests();
   ring_buffer_add_first_tests();
   ring_buffer_add_last_tests();
