@@ -1,24 +1,43 @@
-TESTDIR = ./test
-SRCDIR = ./src
-INCDIR = ./include
-BINDIR = ./output
+SRCDIR=./src
+BUILDDIR=./build
+OBJDIR=$(BUILDDIR)/obj
+INCDIR=./include
 
-TESTFILES = $(wildcard $(TESTDIR)/*_test.c)
-BINFILES = $(patsubst $(TESTDIR)/%.c,$(BINDIR)/%.o,$(TESTFILES))
+CC=gcc
+CFLAGS=-I$(INCDIR)
 
-INCFLAGS = $(addprefix -I,$(TESTDIR) $(SRCDIR) $(INCDIR))
-CFLAGS = $(INCFLAGS)
+.PHONY: test
 
-all:
-	-mkdir $(BINDIR)
-	$(MAKE) build
+SOURCE_PATTERN=$(SRCDIR)/%.c
+OBJECT_PATTERN=$(BUILDDIR)/%.o
 
-build: $(BINFILES)
+SOURCE_FILES=$(wildcard $(SRCDIR)/*.c)
+OBJECT_FILES=$(SOURCE_FILES:$(SOURCE_PATTERN)=$(OBJECT_PATTERN))
 
-$(BINDIR)/%_test.o: $(TESTDIR)/%_test.c $(SRCDIR)/%.c $(INCDIR)/%.h
-	@$(CC) -o $@ $(CFLAGS) $^
-	@echo "File '$@' builded"
+all: $(OBJECT_FILES)
+
+$(OBJECT_PATTERN): $(SOURCE_PATTERN) $(OBJDIR)
+	$(CC) -c $(CFLAGS) $< -o $@
+
+$(SOURCE_PATTERN): $(INCDIR)/%.h
+
+$(OBJDIR):
+	mkdir -p $@
+
+TESTDIR=./test
+
+SRC_TEST_PATTERN=$(TESTDIR)/%.c
+OBJ_TEST_PATTERN=$(BUILDDIR)/$(TESTDIR)/%.o
+
+SRC_TEST_FILES=$(wildcard $(TESTDIR)/*.c)
+OBJ_TEST_FILES=$(SRC_TEST_FILES:$(SRC_TEST_PATTERN)=$(OBJ_TEST_PATTERN))
+
+test: $(OBJ_TEST_FILES)
+
+$(OBJ_TEST_PATTERN): $(SRC_TEST_PATTERN)
+	$(CC) -c -o $@ $(CFLAGS) $<
+	$(MAKE) all
 
 clean:
-	@rm -rf $(BINDIR)
+	@rm -rf $(BUILDDIR)
 
